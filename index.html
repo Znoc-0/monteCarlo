@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monte Carlo Classic Problems</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body class="p-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-8">
+        <h1 class="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-indigo-500 text-transparent bg-clip-text">
+          Monte Carlo Classic Problems
+        </h1>
+        <p class="text-gray-400 mb-4">
+          Exploring fundamental problems solved through random sampling
+        </p>
+        <div class="bg-gray-800 p-6 rounded-xl text-left max-w-3xl mx-auto">
+          <h2 class="text-xl font-semibold mb-3">What is Monte Carlo?</h2>
+          <p class="text-gray-300 leading-relaxed">
+            Monte Carlo methods are a class of computational algorithms that use repeated random sampling to obtain numerical results. The core idea is to use randomness to solve problems that might be deterministic in principle.
+          </p>
+          <p class="text-gray-300 leading-relaxed mt-2">
+            Just as a casino might determine the fairness of a roulette wheel through thousands of spins, Monte Carlo methods use large numbers of random trials to estimate probabilities and solve complex problems in physics, finance, and mathematics.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-6">
+        <!-- PI Estimation -->
+        <div class="card">
+          <h2 class="text-xl font-semibold mb-4">π Estimation</h2>
+          <p class="text-gray-300 mb-4">
+            We estimate π by comparing the ratio of points that fall inside a quarter circle to the total points in a square. Since the ratio of the areas is π/4, multiplying our ratio by 4 gives us an estimate of π.
+            <br><br>
+            <span class="text-blue-400">Blue points</span> fall inside the quarter circle, while <span class="text-red-400">red points</span> fall outside.
+          </p>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium mb-1">Number of Points</label>
+              <input type="number" id="piPoints" class="input-field" value="10000">
+            </div>
+            <button id="runPi" class="btn btn-primary w-full">
+              Estimate π
+            </button>
+            <div class="result-container">
+              <canvas id="piCanvas" width="300" height="300"></canvas>
+              <p id="piResult" class="text-center mt-4"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Buffon's Needle -->
+        <div class="card">
+          <h2 class="text-xl font-semibold mb-4">Buffon's Needle</h2>
+          <p class="text-gray-300 mb-4">
+            In this classic probability problem, we drop needles randomly on a lined surface. The probability of a needle crossing a line is related to π. 
+            <br><br>
+            <span class="text-blue-400">Blue needles</span> don't cross any lines, while <span class="text-red-400">red needles</span> cross a line.
+          </p>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium mb-1">Number of Needles</label>
+              <input type="number" id="needleCount" class="input-field" value="1000">
+            </div>
+            <button id="runBuffon" class="btn btn-primary w-full">
+              Drop Needles
+            </button>
+            <div class="result-container">
+              <canvas id="buffonCanvas" width="400" height="300"></canvas>
+              <p id="buffonResult" class="text-center mt-4"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Area Estimation -->
+        <div class="card">
+          <h2 class="text-xl font-semibold mb-4">Area Estimation</h2>
+          <p class="text-gray-300 mb-4">
+            We can estimate the area of complex shapes by comparing points that fall inside the shape to total points in a bounding box. This is particularly useful for shapes where traditional integration is difficult.
+            <br><br>
+            <span class="text-blue-400">Blue points</span> fall inside the heart shape, while <span class="text-red-400">red points</span> fall outside.
+          </p>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium mb-1">Number of Points</label>
+              <input type="number" id="areaPoints" class="input-field" value="5000">
+            </div>
+            <button id="runArea" class="btn btn-primary w-full">
+              Estimate Area
+            </button>
+            <div class="result-container">
+              <canvas id="areaCanvas" width="300" height="300"></canvas>
+              <p id="areaResult" class="text-center mt-4"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Monte Carlo Integration -->
+        <div class="card">
+          <h2 class="text-xl font-semibold mb-4">Integration</h2>
+          <p class="text-gray-300 mb-4">
+            Monte Carlo integration estimates the area under a curve by randomly sampling points in a bounding rectangle. The ratio of points under the curve to total points, multiplied by the rectangle's area, estimates the integral.
+            <br><br>
+            <span class="text-blue-400">Blue points</span> fall under the curve, while <span class="text-red-400">red points</span> fall above.
+          </p>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium mb-1">Number of Points</label>
+              <input type="number" id="integrationPoints" class="input-field" value="5000">
+            </div>
+            <button id="runIntegration" class="btn btn-primary w-full">
+              Calculate Integral
+            </button>
+            <div class="result-container">
+              <canvas id="integrationCanvas" width="400" height="300"></canvas>
+              <p id="integrationResult" class="text-center mt-4"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
