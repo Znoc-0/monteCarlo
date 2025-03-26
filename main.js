@@ -40,7 +40,12 @@ class PiEstimation {
     }
     
     const pi = 4 * inside / this.points;
-    return pi;
+    return {
+      pi,
+      inside,
+      total: this.points,
+      ratio: inside / this.points
+    };
   }
 }
 
@@ -95,7 +100,13 @@ class BuffonNeedle {
     }
     
     const pi = (2 * this.needleLength * this.needles) / (crosses * this.lineSpacing);
-    return pi;
+    return {
+      pi,
+      crosses,
+      total: this.needles,
+      needleLength: this.needleLength,
+      lineSpacing: this.lineSpacing
+    };
   }
 }
 
@@ -151,7 +162,14 @@ class AreaEstimation {
       if (isInside) inside++;
     }
     
-    return inside / this.points * (this.size * this.size);
+    const area = inside / this.points * (this.size * this.size);
+    return {
+      area,
+      inside,
+      total: this.points,
+      ratio: inside / this.points,
+      boxArea: this.size * this.size
+    };
   }
 }
 
@@ -210,7 +228,16 @@ class MonteCarloIntegration {
     }
     
     const area = (inside / this.points) * (Math.PI * 2);
-    return area;
+    return {
+      area,
+      inside,
+      total: this.points,
+      ratio: inside / this.points,
+      bounds: {
+        width: Math.PI,
+        height: 2
+      }
+    };
   }
 }
 
@@ -225,7 +252,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const points = parseInt(document.getElementById('piPoints').value);
     const simulation = new PiEstimation(piCanvas, points);
     const result = simulation.run();
-    piResult.textContent = `Estimated π: ${result.toFixed(6)} (Actual: ${Math.PI.toFixed(6)})`;
+    piResult.innerHTML = `
+      Points inside: ${result.inside}<br>
+      Total points: ${result.total}<br>
+      Ratio: ${result.ratio.toFixed(6)}<br>
+      π ≈ 4 × ${result.ratio.toFixed(6)} = ${result.pi.toFixed(6)}<br>
+      (Actual π: ${Math.PI.toFixed(6)})
+    `;
   });
 
   // Buffon's Needle
@@ -237,7 +270,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const needles = parseInt(document.getElementById('needleCount').value);
     const simulation = new BuffonNeedle(buffonCanvas, needles);
     const result = simulation.run();
-    buffonResult.textContent = `Estimated π: ${result.toFixed(6)} (Actual: ${Math.PI.toFixed(6)})`;
+    buffonResult.innerHTML = `
+      Crossings: ${result.crosses}<br>
+      Total needles: ${result.total}<br>
+      π ≈ (2 × ${result.needleLength} × ${result.total}) / (${result.lineSpacing} × ${result.crosses})<br>
+      π ≈ ${result.pi.toFixed(6)}<br>
+      (Actual π: ${Math.PI.toFixed(6)})
+    `;
   });
 
   // Area Estimation
@@ -249,7 +288,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const points = parseInt(document.getElementById('areaPoints').value);
     const simulation = new AreaEstimation(areaCanvas, points);
     const result = simulation.run();
-    areaResult.textContent = `Estimated Area: ${result.toFixed(2)} square units`;
+    areaResult.innerHTML = `
+      Points inside: ${result.inside}<br>
+      Total points: ${result.total}<br>
+      Ratio: ${result.ratio.toFixed(6)}<br>
+      Area ≈ ${result.ratio.toFixed(6)} × ${result.boxArea} = ${result.area.toFixed(2)} square units
+    `;
   });
 
   // Monte Carlo Integration
@@ -261,12 +305,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const points = parseInt(document.getElementById('integrationPoints').value);
     const simulation = new MonteCarloIntegration(integrationCanvas, points);
     const result = simulation.run();
-    integrationResult.textContent = `∫(sin(x) + 1)dx from 0 to π ≈ ${result.toFixed(6)}`;
+    integrationResult.innerHTML = `
+      Points under curve: ${result.inside}<br>
+      Total points: ${result.total}<br>
+      Ratio: ${result.ratio.toFixed(6)}<br>
+      ∫(sin(x) + 1)dx from 0 to π ≈ ${result.area.toFixed(6)}<br>
+      = ${result.bounds.width} × ${result.bounds.height} × ${result.ratio.toFixed(6)}
+    `;
   });
-
-  // Run initial simulations
-  runPi.click();
-  runBuffon.click();
-  runArea.click();
-  runIntegration.click();
 });
