@@ -33,13 +33,22 @@
           <h2 class="text-xl font-semibold mb-4">π Estimation</h2>
           <p class="text-gray-300 mb-4">
             We estimate π by comparing the ratio of points that fall inside a quarter circle to the total points in a square. Since the ratio of the areas is π/4, multiplying our ratio by 4 gives us an estimate of π.
-            <br><br>
+          </p>
+          <div class="bg-gray-900 p-4 rounded-lg mb-4">
+            <p class="text-sm text-gray-300 font-mono">
+              π ≈ 4 × (points inside circle / total points)<br>
+              Area of quarter circle = πr²/4<br>
+              Area of square = r²<br>
+              Ratio = (πr²/4)/r² = π/4
+            </p>
+          </div>
+          <p class="text-gray-300 mb-4">
             <span class="text-blue-400">Blue points</span> fall inside the quarter circle, while <span class="text-red-400">red points</span> fall outside.
           </p>
           <div class="space-y-4">
             <div>
               <label class="block text-sm font-medium mb-1">Number of Points</label>
-              <input type="number" id="piPoints" class="input-field" value="10">
+              <input type="number" id="piPoints" class="input-field" placeholder="Enter number of points (e.g. 10000)">
             </div>
             <button id="runPi" class="btn btn-primary w-full">
               Estimate π
@@ -55,14 +64,26 @@
         <div class="card">
           <h2 class="text-xl font-semibold mb-4">Buffon's Needle</h2>
           <p class="text-gray-300 mb-4">
-            In this classic probability problem, we drop needles randomly on a lined surface. The probability of a needle crossing a line is related to π. 
-            <br><br>
+            In this classic probability problem, we drop needles randomly on a lined surface. The probability of a needle crossing a line is related to π.
+          </p>
+          <div class="bg-gray-900 p-4 rounded-lg mb-4">
+            <p class="text-sm text-gray-300 font-mono">
+              P(crossing) = (2L)/(πd)<br>
+              π ≈ (2L × n)/(d × c)<br>
+              Where:<br>
+              L = needle length<br>
+              d = line spacing<br>
+              n = total needles<br>
+              c = crossings
+            </p>
+          </div>
+          <p class="text-gray-300 mb-4">
             <span class="text-blue-400">Blue needles</span> don't cross any lines, while <span class="text-red-400">red needles</span> cross a line.
           </p>
           <div class="space-y-4">
             <div>
               <label class="block text-sm font-medium mb-1">Number of Needles</label>
-              <input type="number" id="needleCount" class="input-field" value="10">
+              <input type="number" id="needleCount" class="input-field" placeholder="Enter number of needles (e.g. 1000)">
             </div>
             <button id="runBuffon" class="btn btn-primary w-full">
               Drop Needles
@@ -78,14 +99,22 @@
         <div class="card">
           <h2 class="text-xl font-semibold mb-4">Area Estimation</h2>
           <p class="text-gray-300 mb-4">
-            We can estimate the area of complex shapes by comparing points that fall inside the shape to total points in a bounding box. This is particularly useful for shapes where traditional integration is difficult.
-            <br><br>
+            We can estimate the area of complex shapes by comparing points that fall inside the shape to total points in a bounding box.
+          </p>
+          <div class="bg-gray-900 p-4 rounded-lg mb-4">
+            <p class="text-sm text-gray-300 font-mono">
+              Area ≈ (points inside shape / total points) × box area<br>
+              For heart shape:<br>
+              (x² + y² - 1)³ - x²y³ ≤ 0
+            </p>
+          </div>
+          <p class="text-gray-300 mb-4">
             <span class="text-blue-400">Blue points</span> fall inside the heart shape, while <span class="text-red-400">red points</span> fall outside.
           </p>
           <div class="space-y-4">
             <div>
               <label class="block text-sm font-medium mb-1">Number of Points</label>
-              <input type="number" id="areaPoints" class="input-field" value="50">
+              <input type="number" id="areaPoints" class="input-field" placeholder="Enter number of points (e.g. 5000)">
             </div>
             <button id="runArea" class="btn btn-primary w-full">
               Estimate Area
@@ -101,14 +130,24 @@
         <div class="card">
           <h2 class="text-xl font-semibold mb-4">Integration</h2>
           <p class="text-gray-300 mb-4">
-            Monte Carlo integration estimates the area under a curve by randomly sampling points in a bounding rectangle. The ratio of points under the curve to total points, multiplied by the rectangle's area, estimates the integral.
-            <br><br>
+            Monte Carlo integration estimates the area under a curve by randomly sampling points in a bounding rectangle.
+          </p>
+          <div class="bg-gray-900 p-4 rounded-lg mb-4">
+            <p class="text-sm text-gray-300 font-mono">
+              ∫[a,b] f(x)dx ≈ (b-a) × h × (points under curve / total points)<br>
+              Where:<br>
+              [a,b] = integration interval<br>
+              h = height of bounding rectangle<br>
+              For sin(x) + 1 from 0 to π
+            </p>
+          </div>
+          <p class="text-gray-300 mb-4">
             <span class="text-blue-400">Blue points</span> fall under the curve, while <span class="text-red-400">red points</span> fall above.
           </p>
           <div class="space-y-4">
             <div>
               <label class="block text-sm font-medium mb-1">Number of Points</label>
-              <input type="number" id="integrationPoints" class="input-field" value="50">
+              <input type="number" id="integrationPoints" class="input-field" placeholder="Enter number of points (e.g. 5000)">
             </div>
             <button id="runIntegration" class="btn btn-primary w-full">
               Calculate Integral
